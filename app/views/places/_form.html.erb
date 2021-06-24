@@ -1,4 +1,11 @@
-<%= form_with(model: place, local: true) do |form| %>
+<%= form_with(model: @place, local: true) do |form| %>
+<% v = 0 %>
+<% @place.stations.each do |x| %>
+<% if x.station.present? %>
+  <% v += 1 %>
+ <% end %>
+<% end %>
+<h3>This property has <%=v%> nearest station(s)</h3>
   <% if place.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
@@ -11,6 +18,7 @@
     </div>
   <% end %>
 
+<h2>Register property</h2>
   <div class="field">
     <%= form.label :property_name %>
     <%= form.text_field :property_name %>
@@ -27,16 +35,47 @@
   </div>
 
   <div class="field">
-    <%= form.label :building_age %>
+    <%= form.label :age "building's age" %>
     <%= form.number_field :building_age %>
   </div>
-
+ s
   <div class="field">
     <%= form.label :remarks %>
     <%= form.text_area :remarks %>
   </div>
+  <hr>
+        <% n = 0 %>
+    <%= form.fields_for :stations do |g| %>
+        <h2>Nearest station <%= n += 1 %></h2>
+        <div class="field">
+          <div>
+            <%= g.label :line, "Line name"%>
+          </div>
+          <div>
+            <%= g.text_field :line %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div>
+            <%= g.label :station, "Station name"  %>
+          </div>
+          <div>
+            <%= g.text_field :station %>
+          </div>
+        </div>
+
+        <div class="field">
+          <div>
+            <%= g.label :time, "Walking distance"  %>
+          </div>
+          <div>
+           <%= g.text_field :time %>min
+          </div>
+        </div>
+         <% end %>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit value: "Register property" %>
   </div>
 <% end %>
