@@ -6,11 +6,11 @@
 
 <% n = 0 %>
 <% @place.stations.each do |x| %>
-	<% if x.station.present? %>
+	<% if x.station_name.present? %>
 		<% n += 1 %>
 	<% end %>
 <% end %>
-<h3>This property has <%=n %> nearest station(s)</h3>
+<h3>This property has <%= n %> nearest station(s)</h3>
 
 <hr>
 <p>
@@ -41,22 +41,22 @@
 <hr>
  <div>
 <%n = 0%>
-<% @property.stations.each do |station|%>
-    <% if station.station.present? %>
+<% @place.stations.each do |station|%>
+    <% if station.station_name.present? %>
     <h2>Nearest Station<%= n += 1 %></h2>
 
   <p>
-    <strong>Line:</strong>
-    <%= station.line %>
+    <strong>Name of railway line:</strong>
+    <%= station.name_of_railway_line %>
   </p>
 
   <p>
     <strong> Station:</strong>
-    <%= station.station %>
+    <%= station.station_name %>
   </p>
   <p>
     <strong>By walk:</strong>
-    <%= station.time %>
+    <%= station.how_many_mins_walk %>
   </p>
   <% end %>
   <% end %>

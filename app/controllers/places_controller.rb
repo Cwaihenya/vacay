@@ -12,20 +12,21 @@ class PlacesController < ApplicationController
 
   # GET /places/new
   def new
-  @place = Place.new
-  1.times{@property.stations.build }
+    @place = Place.new
+    1.times{ @place.stations.build }
  end
 
   # GET /places/1/edit
   def edit
-    @property.stations.build
+    @place.stations.build
   end
 
   # POST /places or /places.json
   def create
     @place = Place.new(place_params)
-
-    respond_to do |format|
+    if params[:back]
+        render :new
+    else
       if @place.save
         format.html { redirect_to place_path, notice: "Place was successfully created." }
         format.json { render :show, status: :created, location: @place }
@@ -66,6 +67,6 @@ class PlacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def place_params
-      params.require(:place).permit(:property_name, :rent, :address, :building_age, :remarks)
+      params.require(:place).permit(:property_name, :rent, :address, :building_age, :remarks, stations_attributes: [:id, :line, :station, :time])
     end
 end

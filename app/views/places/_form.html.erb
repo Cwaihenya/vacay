@@ -1,11 +1,11 @@
 <%= form_with(model: @place, local: true) do |form| %>
 <% v = 0 %>
 <% @place.stations.each do |x| %>
-<% if x.station.present? %>
+<% if x.station_name.present? %>
   <% v += 1 %>
  <% end %>
 <% end %>
-<h3>This property has <%=v%> nearest station(s)</h3>
+<h3>This property has <%= v %> nearest station(s)</h3>
   <% if place.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
@@ -35,10 +35,10 @@
   </div>
 
   <div class="field">
-    <%= form.label :age "building's age" %>
+    <%= form.label :age, "Building's age" %>
     <%= form.number_field :building_age %>
   </div>
- s
+
   <div class="field">
     <%= form.label :remarks %>
     <%= form.text_area :remarks %>
@@ -49,10 +49,10 @@
         <h2>Nearest station <%= n += 1 %></h2>
         <div class="field">
           <div>
-            <%= g.label :line, "Line name"%>
+            <%= g.label :line, "Name of railway line"%>
           </div>
           <div>
-            <%= g.text_field :line %>
+            <%= g.text_field :name_of_railway_line %>
           </div>
         </div>
 
@@ -61,7 +61,7 @@
             <%= g.label :station, "Station name"  %>
           </div>
           <div>
-            <%= g.text_field :station %>
+            <%= g.text_field :station_name %>
           </div>
         </div>
 
@@ -70,7 +70,7 @@
             <%= g.label :time, "Walking distance"  %>
           </div>
           <div>
-           <%= g.text_field :time %>min
+           <%= g.text_field :how_many_mins_walk %>min
           </div>
         </div>
          <% end %>
