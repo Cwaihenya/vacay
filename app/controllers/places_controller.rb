@@ -12,11 +12,13 @@ class PlacesController < ApplicationController
 
   # GET /places/new
   def new
-    @place = Place.new
-  end
+  @place = Place.new
+  1.times{@property.stations.build }
+ end
 
   # GET /places/1/edit
   def edit
+    @property.stations.build
   end
 
   # POST /places or /places.json
@@ -25,7 +27,7 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save
-        format.html { redirect_to @place, notice: "Place was successfully created." }
+        format.html { redirect_to place_path, notice: "Place was successfully created." }
         format.json { render :show, status: :created, location: @place }
       else
         format.html { render :new, status: :unprocessable_entity }
