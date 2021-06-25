@@ -26,6 +26,7 @@ class PlacesController < ApplicationController
     @place = Place.new(place_params)
     if params[:back]
         render :new
+
     else
       if @place.save
         format.html { redirect_to place_path, notice: "Place was successfully created." }
@@ -36,6 +37,7 @@ class PlacesController < ApplicationController
       end
     end
   end
+
 
   # PATCH/PUT /places/1 or /places/1.json
   def update
@@ -52,6 +54,7 @@ class PlacesController < ApplicationController
 
   # DELETE /places/1 or /places/1.json
   def destroy
+    @place = Place.find(params[:id])
     @place.destroy
     respond_to do |format|
       format.html { redirect_to places_url, notice: "Place was successfully destroyed." }
@@ -69,4 +72,4 @@ class PlacesController < ApplicationController
     def place_params
       params.require(:place).permit(:property_name, :rent, :address, :building_age, :remarks, stations_attributes: [:id, :line, :station, :time])
     end
-end
+  end

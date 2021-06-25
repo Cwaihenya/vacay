@@ -1,3 +1,3 @@
 class Station < ApplicationRecord
-  belongs_to :place
+  belongs_to :place 
 end
