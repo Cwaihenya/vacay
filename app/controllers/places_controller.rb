@@ -24,6 +24,7 @@ class PlacesController < ApplicationController
   # POST /places or /places.json
   def create
     @place = Place.new(place_params)
+    respond_to do |format|
     if params[:back]
         render :new
 
@@ -73,3 +74,4 @@ class PlacesController < ApplicationController
       params.require(:place).permit(:property_name, :rent, :address, :building_age, :remarks, stations_attributes: [:id, :line, :station, :time])
     end
   end
+end
