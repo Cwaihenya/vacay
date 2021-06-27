@@ -25,16 +25,17 @@ class PlacesController < ApplicationController
   def create
     @place = Place.new(place_params)
     respond_to do |format|
-    if params[:back]
-        render :new
+      if params[:back]
+          render :new
 
-    else
-      if @place.save
-        format.html { redirect_to place_path, notice: "Place was successfully created." }
-        format.json { render :show, status: :created, location: @place }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @place.errors, status: :unprocessable_entity }
+        if @place.save
+          format.html { redirect_to places_path, notice: "Place was successfully created." }
+          format.json { render :show, status: :created, location: @place }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @place.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -74,4 +75,3 @@ class PlacesController < ApplicationController
       params.require(:place).permit(:property_name, :rent, :address, :building_age, :remarks, stations_attributes: [:id, :line, :station, :time])
     end
   end
-end
