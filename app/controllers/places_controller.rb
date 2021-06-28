@@ -72,6 +72,6 @@ class PlacesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def place_params
-      params.require(:place).permit(:property_name, :rent, :address, :building_age, :remarks, stations_attributes: [:id, :line, :station, :time])
+      params.require(:place).permit(:property_name, :rent, :address, :building_age, :remarks, stations_attributes: [:id, :name_of_railway_line, :station_name, :how_many_mins_walk])
     end
   end
